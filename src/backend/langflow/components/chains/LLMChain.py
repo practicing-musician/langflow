@@ -1,10 +1,12 @@
-from langflow import CustomComponent
+from typing import Callable, Optional, Union
+
 from langchain.chains import LLMChain
-from typing import Optional, Union, Callable
+
+from langflow import CustomComponent
 from langflow.field_typing import (
-    BasePromptTemplate,
     BaseLanguageModel,
     BaseMemory,
+    BasePromptTemplate,
     Chain,
 )
 
@@ -26,5 +28,5 @@ class LLMChainComponent(CustomComponent):
         prompt: BasePromptTemplate,
         llm: BaseLanguageModel,
         memory: Optional[BaseMemory] = None,
-    ) -> Union[Chain, Callable]:
+    ) -> Union[Chain, Callable, LLMChain]:
         return LLMChain(prompt=prompt, llm=llm, memory=memory)

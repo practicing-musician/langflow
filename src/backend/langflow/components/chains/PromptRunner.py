@@ -1,8 +1,8 @@
-from langflow import CustomComponent
-
 from langchain.llms.base import BaseLLM
 from langchain.prompts import PromptTemplate
-from langchain.schema import Document
+from langchain_core.documents import Document
+
+from langflow import CustomComponent
 
 
 class PromptRunner(CustomComponent):
@@ -18,9 +18,7 @@ class PromptRunner(CustomComponent):
         "code": {"show": False},
     }
 
-    def build(
-        self, llm: BaseLLM, prompt: PromptTemplate, inputs: dict = {}
-    ) -> Document:
+    def build(self, llm: BaseLLM, prompt: PromptTemplate, inputs: dict = {}) -> Document:
         chain = prompt | llm
         # The input is an empty dict because the prompt is already filled
         result = chain.invoke(input=inputs)

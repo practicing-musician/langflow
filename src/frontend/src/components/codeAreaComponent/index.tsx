@@ -19,11 +19,11 @@ export default function CodeAreaComponent({
     typeof value == "string" ? value : JSON.stringify(value)
   );
   useEffect(() => {
-    if (disabled) {
+    if (disabled && myValue !== "") {
       setMyValue("");
       onChange("");
     }
-  }, [disabled, onChange]);
+  }, [disabled]);
 
   useEffect(() => {
     setMyValue(typeof value == "string" ? value : JSON.stringify(value));
@@ -45,6 +45,7 @@ export default function CodeAreaComponent({
         <div className="flex w-full items-center">
           <span
             id={id}
+            data-testid={id}
             className={
               editNode
                 ? "input-edit-node input-dialog"

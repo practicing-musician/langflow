@@ -41,9 +41,7 @@ class BaseCustomConversationChain(ConversationChain):
         values["template"] = values["template"].format(**format_dict)
 
         values["template"] = values["template"]
-        values["input_variables"] = extract_input_variables_from_prompt(
-            values["template"]
-        )
+        values["input_variables"] = extract_input_variables_from_prompt(values["template"])
         values["prompt"].template = values["template"]
         values["prompt"].input_variables = values["input_variables"]
         return values
@@ -54,9 +52,7 @@ class SeriesCharacterChain(BaseCustomConversationChain):
 
     character: str
     series: str
-    template: Optional[
-        str
-    ] = """I want you to act like {character} from {series}.
+    template: Optional[str] = """I want you to act like {character} from {series}.
 I want you to respond and answer like {character}. do not write any explanations. only answer like {character}.
 You must know all of the knowledge of {character}.
 Current conversation:

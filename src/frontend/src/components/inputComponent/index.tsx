@@ -24,10 +24,10 @@ export default function InputComponent({
   const refInput = useRef<HTMLInputElement>(null);
   // Clear component state
   useEffect(() => {
-    if (disabled) {
+    if (disabled && value !== "") {
       onChange("");
     }
-  }, [disabled, onChange]);
+  }, [disabled]);
 
   return (
     <div className="relative w-full">
@@ -54,6 +54,9 @@ export default function InputComponent({
             placeholder={password && editNode ? "Key" : placeholder}
             onChange={(e) => {
               onChange(e.target.value);
+            }}
+            onCopy={(e) => {
+              e.preventDefault();
             }}
             onKeyDown={(e) => {
               handleKeyDown(e, value, "");

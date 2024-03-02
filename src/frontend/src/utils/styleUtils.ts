@@ -2,6 +2,8 @@ import {
   ArrowUpToLine,
   Bell,
   BookMarked,
+  BookmarkPlus,
+  Boxes,
   Check,
   CheckCircle2,
   ChevronDown,
@@ -14,6 +16,7 @@ import {
   Circle,
   Clipboard,
   Code2,
+  Combine,
   Compass,
   Copy,
   Cpu,
@@ -31,11 +34,15 @@ import {
   FileText,
   FileUp,
   Fingerprint,
+  FolderPlus,
+  Forward,
   Gift,
+  GitBranchPlus,
   GitFork,
   GithubIcon,
   Group,
   Hammer,
+  Heart,
   HelpCircle,
   Home,
   Info,
@@ -44,7 +51,9 @@ import {
   Layers,
   Lightbulb,
   Link,
+  Loader2,
   Lock,
+  LogIn,
   LucideSend,
   Maximize2,
   Menu,
@@ -55,20 +64,28 @@ import {
   Minus,
   MoonIcon,
   MoreHorizontal,
+  Network,
   Paperclip,
   Pencil,
   Plus,
   Redo,
+  RefreshCcw,
   Rocket,
   Save,
+  SaveAll,
   Scissors,
   Search,
   Settings2,
+  Share,
+  Share2,
   Shield,
   Sparkles,
   Square,
+  Store,
   SunIcon,
+  TerminalIcon,
   TerminalSquare,
+  ToyBrick,
   Trash2,
   Undo,
   Ungroup,
@@ -81,6 +98,7 @@ import {
   Users2,
   Variable,
   Wand2,
+  Workflow,
   Wrench,
   X,
   XCircle,
@@ -93,11 +111,16 @@ import { AnthropicIcon } from "../icons/Anthropic";
 import { BingIcon } from "../icons/Bing";
 import { ChromaIcon } from "../icons/ChromaIcon";
 import { CohereIcon } from "../icons/Cohere";
+import { ElasticsearchIcon } from "../icons/ElasticsearchStore";
 import { EvernoteIcon } from "../icons/Evernote";
 import { FBIcon } from "../icons/FacebookMessenger";
 import { GitBookIcon } from "../icons/GitBook";
 import { GoogleIcon } from "../icons/Google";
-import { GradientSparkles } from "../icons/GradientSparkles";
+import {
+  GradientInfinity,
+  GradientSave,
+  GradientUngroup,
+} from "../icons/GradientSparkles";
 import { HuggingFaceIcon } from "../icons/HuggingFace";
 import { IFixIcon } from "../icons/IFixIt";
 import { MetaIcon } from "../icons/Meta";
@@ -108,8 +131,12 @@ import { OpenAiIcon } from "../icons/OpenAi";
 import { PineconeIcon } from "../icons/Pinecone";
 import { QDrantIcon } from "../icons/QDrant";
 import { SearxIcon } from "../icons/Searx";
+import { ShareIcon } from "../icons/Share";
+import { Share2Icon } from "../icons/Share2";
 import SvgSlackIcon from "../icons/Slack/SlackIcon";
+import { VectaraIcon } from "../icons/VectaraIcon";
 import { VertexAIIcon } from "../icons/VertexAI";
+import { WeaviateIcon } from "../icons/Weaviate";
 import SvgWikipedia from "../icons/Wikipedia/Wikipedia";
 import SvgWolfram from "../icons/Wolfram/Wolfram";
 import { HackerNewsIcon } from "../icons/hackerNews";
@@ -154,9 +181,12 @@ export const nodeColors: { [char: string]: string } = {
   prompts: "#4367BF",
   llms: "#6344BE",
   chains: "#FE7500",
+  Document: "#7AAE42",
+  list: "#9AAE42",
   agents: "#903BBE",
   tools: "#FF3434",
   memories: "#F5B85A",
+  saved_components: "#a5B85A",
   advanced: "#000000",
   chat: "#198BF6",
   thought: "#272541",
@@ -181,6 +211,7 @@ export const nodeNames: { [char: string]: string } = {
   agents: "Agents",
   tools: "Tools",
   memories: "Memories",
+  saved_components: "Saved",
   advanced: "Advanced",
   chat: "Chat",
   embeddings: "Embeddings",
@@ -197,6 +228,7 @@ export const nodeNames: { [char: string]: string } = {
 };
 
 export const nodeIconsLucide: iconsType = {
+  Vectara: VectaraIcon,
   ArrowUpToLine: ArrowUpToLine,
   Chroma: ChromaIcon,
   AirbyteJSONLoader: AirbyteIcon,
@@ -222,17 +254,23 @@ export const nodeIconsLucide: iconsType = {
   MongoDBAtlasVectorSearch: MongoDBIcon,
   NotionDirectoryLoader: NotionIcon,
   ChatOpenAI: OpenAiIcon,
+  AzureChatOpenAI: OpenAiIcon,
   OpenAI: OpenAiIcon,
   OpenAIEmbeddings: OpenAiIcon,
   Pinecone: PineconeIcon,
   Qdrant: QDrantIcon,
+  ElasticsearchStore: ElasticsearchIcon,
+  Weaviate: WeaviateIcon,
   Searx: SearxIcon,
   SlackDirectoryLoader: SvgSlackIcon,
   SupabaseVectorStore: SupabaseIcon,
   VertexAI: VertexAIIcon,
   ChatVertexAI: VertexAIIcon,
   VertexAIEmbeddings: VertexAIIcon,
+  Share3: ShareIcon,
+  Share4: Share2Icon,
   agents: Rocket,
+  Workflow,
   User,
   WikipediaAPIWrapper: SvgWikipedia,
   chains: Link,
@@ -243,6 +281,7 @@ export const nodeIconsLucide: iconsType = {
   advanced: Laptop2,
   chat: MessageCircle,
   embeddings: Fingerprint,
+  saved_components: GradientSave,
   documentloaders: Paperclip,
   vectorstores: Layers,
   toolkits: Hammer,
@@ -255,9 +294,12 @@ export const nodeIconsLucide: iconsType = {
   unknown: HelpCircle,
   WikipediaQueryRun: SvgWikipedia,
   WolframAlphaQueryRun: SvgWolfram,
-  custom_components: GradientSparkles,
+  custom_components: GradientInfinity,
+  group_components: GradientUngroup,
   custom: Edit,
   Trash2,
+  Boxes,
+  Network,
   X,
   XCircle,
   Info,
@@ -285,6 +327,7 @@ export const nodeIconsLucide: iconsType = {
   Clipboard,
   Code2,
   Variable,
+  Store,
   Download,
   Eraser,
   Lock,
@@ -293,6 +336,7 @@ export const nodeIconsLucide: iconsType = {
   DownloadCloud,
   File,
   FileText,
+  FolderPlus,
   GitFork,
   GithubIcon,
   FileDown,
@@ -317,6 +361,7 @@ export const nodeIconsLucide: iconsType = {
   Key,
   Unplug,
   Group,
+  LogIn,
   ChevronUp,
   Ungroup,
   BookMarked,
@@ -324,4 +369,17 @@ export const nodeIconsLucide: iconsType = {
   Square,
   Minimize2,
   Maximize2,
+  SaveAll,
+  Forward,
+  Share2,
+  Share,
+  GitBranchPlus,
+  Loader2,
+  BookmarkPlus,
+  Heart,
+  Link,
+  ToyBrick,
+  RefreshCcw,
+  Combine,
+  TerminalIcon,
 };

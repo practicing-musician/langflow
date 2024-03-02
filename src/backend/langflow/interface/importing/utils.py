@@ -3,15 +3,15 @@
 import importlib
 from typing import Any, Type
 
-from langchain.prompts import PromptTemplate
 from langchain.agents import Agent
 from langchain.base_language import BaseLanguageModel
 from langchain.chains.base import Chain
-from langchain.chat_models.base import BaseChatModel
+from langchain.prompts import PromptTemplate
 from langchain.tools import BaseTool
+from langchain_core.language_models.chat_models import BaseChatModel
 from langflow.interface.custom.custom_component import CustomComponent
-from langflow.utils import validate
 from langflow.interface.wrappers.base import wrapper_creator
+from langflow.utils import validate
 
 
 def import_module(module_path: str) -> Any:
@@ -71,7 +71,7 @@ def import_output_parser(output_parser: str) -> Any:
 
 def import_chat_llm(llm: str) -> BaseChatModel:
     """Import chat llm from llm name"""
-    return import_class(f"langchain.chat_models.{llm}")
+    return import_class(f"langchain_community.chat_models.{llm}")
 
 
 def import_retriever(retriever: str) -> Any:
@@ -104,10 +104,7 @@ def import_prompt(prompt: str) -> Type[PromptTemplate]:
 
 def import_wrapper(wrapper: str) -> Any:
     """Import wrapper from wrapper name"""
-    if (
-        isinstance(wrapper_creator.type_dict, dict)
-        and wrapper in wrapper_creator.type_dict
-    ):
+    if isinstance(wrapper_creator.type_dict, dict) and wrapper in wrapper_creator.type_dict:
         return wrapper_creator.type_dict.get(wrapper)
 
 
@@ -151,17 +148,17 @@ def import_chain(chain: str) -> Type[Chain]:
 
 def import_embedding(embedding: str) -> Any:
     """Import embedding from embedding name"""
-    return import_class(f"langchain.embeddings.{embedding}")
+    return import_class(f"langchain_community.embeddings.{embedding}")
 
 
 def import_vectorstore(vectorstore: str) -> Any:
     """Import vectorstore from vectorstore name"""
-    return import_class(f"langchain.vectorstores.{vectorstore}")
+    return import_class(f"langchain_community.vectorstores.{vectorstore}")
 
 
 def import_documentloader(documentloader: str) -> Any:
     """Import documentloader from documentloader name"""
-    return import_class(f"langchain.document_loaders.{documentloader}")
+    return import_class(f"langchain_community.document_loaders.{documentloader}")
 
 
 def import_textsplitter(textsplitter: str) -> Any:
@@ -172,8 +169,8 @@ def import_textsplitter(textsplitter: str) -> Any:
 def import_utility(utility: str) -> Any:
     """Import utility from utility name"""
     if utility == "SQLDatabase":
-        return import_class(f"langchain.sql_database.{utility}")
-    return import_class(f"langchain.utilities.{utility}")
+        return import_class(f"langchain_community.sql_database.{utility}")
+    return import_class(f"langchain_community.utilities.{utility}")
 
 
 def get_function(code):
@@ -183,6 +180,7 @@ def get_function(code):
     return validate.create_function(code, function_name)
 
 
-def get_function_custom(code):
+def eval_custom_component_code(code: str) -> Type[CustomComponent]:
+    """Evaluate custom component code"""
     class_name = validate.extract_class_name(code)
     return validate.create_class(code, class_name)

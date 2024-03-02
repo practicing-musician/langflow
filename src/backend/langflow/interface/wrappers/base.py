@@ -1,9 +1,9 @@
 from typing import ClassVar, Dict, List, Optional
 
-from langchain.utilities import requests, sql_database
+from langchain_community.utilities import requests, sql_database
+from loguru import logger
 
 from langflow.interface.base import LangChainTypeCreator
-from loguru import logger
 from langflow.utils.util import build_template_from_class, build_template_from_method
 
 
@@ -16,8 +16,7 @@ class WrapperCreator(LangChainTypeCreator):
     def type_to_loader_dict(self) -> Dict:
         if self.type_dict is None:
             self.type_dict = {
-                wrapper.__name__: wrapper
-                for wrapper in [requests.TextRequestsWrapper, sql_database.SQLDatabase]
+                wrapper.__name__: wrapper for wrapper in [requests.TextRequestsWrapper, sql_database.SQLDatabase]
             }
         return self.type_dict
 

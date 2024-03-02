@@ -1,14 +1,13 @@
 from typing import Dict, List, Optional, Type
 
-from langchain import utilities
+from langchain_community import utilities
+from loguru import logger
 
 from langflow.custom.customs import get_custom_nodes
 from langflow.interface.base import LangChainTypeCreator
 from langflow.interface.importing.utils import import_class
-from langflow.services.getters import get_settings_service
-
+from langflow.services.deps import get_settings_service
 from langflow.template.frontend_node.utilities import UtilitiesFrontendNode
-from loguru import logger
 from langflow.utils.util import build_template_from_class
 
 
@@ -31,7 +30,7 @@ class UtilityCreator(LangChainTypeCreator):
             self.type_dict = {}
             for utility_name in utilities.__all__:
                 try:
-                    imported = import_class(f"langchain.utilities.{utility_name}")
+                    imported = import_class(f"langchain_community.utilities.{utility_name}")
                     self.type_dict[utility_name] = imported
                 except Exception:
                     pass
@@ -41,8 +40,7 @@ class UtilityCreator(LangChainTypeCreator):
             self.type_dict = {
                 name: utility
                 for name, utility in self.type_dict.items()
-                if name in settings_service.settings.UTILITIES
-                or settings_service.settings.DEV
+                if name in settings_service.settings.UTILITIES or settings_service.settings.DEV
             }
 
         return self.type_dict
